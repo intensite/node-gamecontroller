@@ -85,6 +85,15 @@ GameController.prototype = {
       }
     });
 
+    hid.on('error', function(err) { 
+      console.log('Error ----------');
+      self.emit('error', err);
+    });
+    hid.on('disconnect', function() { 
+      console.log('Disconnected ----------');
+      self.emit('disconnect');
+    });
+
     if (cb instanceof Function) {
       cb();
     }
@@ -93,7 +102,7 @@ GameController.prototype = {
   },
   close: function() {
     if (this._hid) {
-      this._hid.disconnect();
+      this._hid.close();
       this._hid = null;
     }
 
