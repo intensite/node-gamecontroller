@@ -62,10 +62,12 @@ GameController.prototype = {
 
         if (sp[0] === 'axis') {
 
+          let Xkey = sp[0] + ':' + sp[1] + ':X';
           let Ykey = sp[0] + ':' + sp[1] + ':Y';
 
-          if (sp[2] === 'X' && (ns !== os || newState[Ykey] !== oldState[Ykey])) {
-            pass.x = ns;
+          if ((sp[2] === 'X' || sp[2] === 'Y') && (ns !== os || newState[Ykey] !== oldState[Ykey] || newState[Xkey] !== oldState[Xkey])) {
+            // pass.x = ns;
+            pass.x = newState[Xkey];
             pass.y = newState[Ykey];
             self.emit(sp[1] + ':move', pass);
           }
@@ -91,7 +93,7 @@ GameController.prototype = {
   },
   close: function() {
     if (this._hid) {
-      this._hid.close();
+      this._hid.disconnect();
       this._hid = null;
     }
 
