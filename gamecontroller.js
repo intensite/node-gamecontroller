@@ -65,8 +65,8 @@ GameController.prototype = {
           let Xkey = sp[0] + ':' + sp[1] + ':X';
           let Ykey = sp[0] + ':' + sp[1] + ':Y';
 
-          if ((sp[2] === 'X' || sp[2] === 'Y') && (ns !== os || newState[Ykey] !== oldState[Ykey] || newState[Xkey] !== oldState[Xkey])) {
-            // pass.x = ns;
+          // Edited by S.Remillard (https://github.com/intensite/node-gamecontroller)
+          if ((sp[2] === 'X' || sp[2] === 'Y')) { 
             pass.x = newState[Xkey];
             pass.y = newState[Ykey];
             self.emit(sp[1] + ':move', pass);
